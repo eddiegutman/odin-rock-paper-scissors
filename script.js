@@ -6,3 +6,7 @@ function getComputerChoice() {
   return choice[randomNum];
 }
 
+function getHumanChoice() {
+  const humanChoice = prompt('Rock Paper or Scissors?')
+  console.log(humanChoice)
+}

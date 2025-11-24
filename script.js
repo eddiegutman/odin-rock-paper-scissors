@@ -17,6 +17,23 @@ function getHumanChoice() {
   return humanChoice?.toLowerCase();
 }
 
+function playRound(humanChoice, computerChoice) {
+    const resultNum = winCondition[humanChoice][computerChoice];
+    if (resultNum === 0) {
+      console.log('Tie!');
+      return;
+    }
+
+    // human won
+    if (resultNum > 0) {
+      humanScore++;
+      console.log(`You won! ${humanChoice} beats ${computerChoice}`);
+    } else { // computer won
+      computerScore++;
+      console.log(`You lost! ${computerChoice} beats ${humanChoice}`);
+    }
+  }
+
 function playGame() {
   let humanScore = 0;
   let computerScore = 0;
@@ -33,23 +50,6 @@ function playGame() {
     console.log('You won the game!');
   } else {
     console.log('You lost the game!');
-  }
-
-  function playRound(humanChoice, computerChoice) {
-    const resultNum = winCondition[humanChoice][computerChoice];
-    if (resultNum === 0) {
-      console.log('Tie!');
-      return;
-    }
-
-    // human won
-    if (resultNum > 0) {
-      humanScore++;
-      console.log(`You won! ${humanChoice} beats ${computerChoice}`);
-    } else { // computer won
-      computerScore++;
-      console.log(`You lost! ${computerChoice} beats ${humanChoice}`);
-    }
   }
 }
 

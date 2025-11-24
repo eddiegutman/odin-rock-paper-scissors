@@ -1,3 +1,7 @@
+const HUMAN_WIN = 1;
+const TIE = 0;
+const COMPUTER_WIN = -1;
+
 const choices = ['rock', 'paper', 'scissors'];
 
 const winCondition = {
@@ -17,23 +21,23 @@ function getHumanChoice() {
 }
 
 
-function updateScore(winner, scores) {
-  if (winner === 'human') {
+function updateScore(outcome, scores) {
+  if (outcome === HUMAN_WIN) {
     scores.human++;
-  } else if (winner === 'computer') {
+  } else if (outcome === COMPUTER_WIN) {
     scores.computer++;
   }
 }
 
-function declareRoundWinner(winner, humanChoice, computerChoice) {
-  switch (winner) {
-    case 'tie':
+function declareRoundWinner(outcome, humanChoice, computerChoice) {
+  switch (outcome) {
+    case TIE:
       console.log('Tie!');
       break;
-    case 'human':
+    case HUMAN_WIN:
       console.log(`You won! ${humanChoice} beats ${computerChoice}`);
       break;
-    case 'computer':
+    case COMPUTER_WIN:
       console.log(`You lost! ${computerChoice} beats ${humanChoice}`);
       break;
   }
@@ -41,14 +45,14 @@ function declareRoundWinner(winner, humanChoice, computerChoice) {
 
 function playRound(humanChoice, computerChoice) {
   if (humanChoice === computerChoice) {
-    return 'tie';
+    return TIE;
   }
 
   // human won
   if (winCondition[humanChoice] === computerChoice) {
-    return 'human';
+    return HUMAN_WIN;
   } else {
-    return 'computer';
+    return COMPUTER_WIN;
   }
 }
 

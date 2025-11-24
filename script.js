@@ -2,22 +2,21 @@ const HUMAN_WIN = 1;
 const TIE = 0;
 const COMPUTER_WIN = -1;
 
-const choices = ['rock', 'paper', 'scissors'];
+const ROCK = 0;
+const PAPER = 1;
+const SCISSORS = 2;
 
-const winCondition = {
-  'rock': 'scissors',
-  'paper': 'rock',
-  'scissors': 'paper',
-}
+const choices = ['rock', 'paper', 'scissors'];
+const winCondition = [SCISSORS, ROCK, PAPER];
+
 
 function getComputerChoice() {
-  const randomNum = Math.floor(Math.random() * choices.length)
-  return choices[randomNum];
+  return Math.floor(Math.random() * choices.length)
 }
 
 function getHumanChoice() {
-  const humanChoice = prompt('Rock Paper or Scissors?');
-  return humanChoice?.toLowerCase();
+  const humanChoice = prompt('Rock Paper or Scissors?')?.toLowerCase();
+  return choices.indexOf(humanChoice);
 }
 
 
@@ -35,10 +34,10 @@ function declareRoundWinner(outcome, humanChoice, computerChoice) {
       console.log('Tie!');
       break;
     case HUMAN_WIN:
-      console.log(`You won! ${humanChoice} beats ${computerChoice}`);
+      console.log(`You won! ${choices[humanChoice]} beats ${choices[computerChoice]}`);
       break;
     case COMPUTER_WIN:
-      console.log(`You lost! ${computerChoice} beats ${humanChoice}`);
+      console.log(`You lost! ${choices[computerChoice]} beats ${choices[humanChoice]}`);
       break;
   }
 }

@@ -73,7 +73,7 @@ function playGame(numOfRounds = 5) {
     updateScore(outcome, scores);
     declareRoundWinner(outcome, humanSelection, computerSelection);
 
-    if (scores.human === 3 || scores.computer === 3) {
+    if (scores.human === Math.ceil(numOfRounds / 2) || scores.computer === Math.ceil(numOfRounds / 2)) {
       break;
     }
   }

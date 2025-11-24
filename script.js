@@ -18,19 +18,54 @@ function getHumanChoice() {
   return humanChoice?.toLowerCase();
 }
 
-function playRound(humanChoice, computerChoice) {
+function getRoundWinner(humanChoice, computerChoice) {
   if (humanChoice === computerChoice) {
-    console.log('Tie!');
-    return;
+    return 'tie';
   }
 
   // human won
   if (winCondition[humanChoice] === computerChoice) {
+    return 'human';
+  } else {
+    return 'computer';
+  }
+}
+
+function updateScore(winner) {
+  if (winner === 'human') {
     humanScore++;
-    console.log(`You won! ${humanChoice} beats ${computerChoice}`);
-  } else { // computer won
+  } else if (winner === 'computer') {
     computerScore++;
-    console.log(`You lost! ${computerChoice} beats ${humanChoice}`);
+  }
+}
+
+function declareRoundWinner(winner, humanChoice, computerChoice) {
+  switch (winner) {
+    case 'tie':
+      console.log('Tie!');
+      break;
+    case 'human':
+      console.log(`You won! ${humanChoice} beats ${computerChoice}`);
+      break;
+    case 'computer':
+      console.log(`You lost! ${computerChoice} beats ${humanChoice}`);
+      break;
+  }
+}
+
+function playRound(humanChoice, computerChoice) {
+  const outcome = getRoundWinner(humanChoice, computerChoice);
+  updateScore(outcome);
+  declareRoundWinner(outcome, humanChoice, computerChoice);
+}
+
+function declareGameWinner() {
+  if (humanScore === computerScore) {
+    console.log('Tie!');
+  } else if (humanScore > computerScore) {
+    console.log('You won the game!');
+  } else {
+    console.log('You lost the game!');
   }
 }
 
@@ -40,14 +75,7 @@ function playGame(numOfRounds = 5) {
     const computerSelection = getComputerChoice();
     playRound(humanSelection, computerSelection);
   }
-
-  if (humanScore === computerScore) {
-    console.log('Tie!');
-  } else if (humanScore > computerScore) {
-    console.log('You won the game!');
-  } else {
-    console.log('You lost the game!');
-  }
+  declareGameWinner();
 }
 
 playGame();

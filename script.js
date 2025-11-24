@@ -68,6 +68,10 @@ function playGame(numOfRounds = 5) {
     const humanSelection = getHumanChoice();
     const computerSelection = getComputerChoice();
     playRound(humanSelection, computerSelection);
+
+    if (humanScore === 3 || computerScore === 3) {
+      break;
+    }
   }
   declareGameWinner(humanScore, computerScore);
 }

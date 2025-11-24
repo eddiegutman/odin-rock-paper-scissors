@@ -1,5 +1,4 @@
-const choice = ['rock', 'paper', 'scissors'];
-const choicesCount = 3;
+const choices = ['rock', 'paper', 'scissors'];
 
 const winCondition = {
   'rock': { 'rock': 0, 'paper': -1, 'scissors': 1 },
@@ -8,7 +7,7 @@ const winCondition = {
 }
 
 function getComputerChoice() {
-  const randomNum = Math.floor(Math.random() * choicesCount)
+  const randomNum = Math.floor(Math.random() * choices.length)
   return choice[randomNum];
 }
 
@@ -34,11 +33,11 @@ function playRound(humanChoice, computerChoice) {
     }
   }
 
-function playGame() {
+function playGame(numOfRounds = 5) {
   let humanScore = 0;
   let computerScore = 0;
 
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < numOfRounds; i++) {
     const humanSelection = getHumanChoice();
     const computerSelection = getComputerChoice();
     playRound(humanSelection, computerSelection);

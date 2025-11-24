@@ -8,7 +8,7 @@ const winCondition = {
 
 function getComputerChoice() {
   const randomNum = Math.floor(Math.random() * choices.length)
-  return choice[randomNum];
+  return choices[randomNum];
 }
 
 function getHumanChoice() {

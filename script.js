@@ -66,6 +66,8 @@ function playGame(numOfRounds = 5) {
     computer: 0,
   }
 
+  const earlyExitScore = Math.ceil(numOfRounds / 2);
+
   for (let i = 0; i < numOfRounds; i++) {
     const humanSelection = getHumanChoice();
     const computerSelection = getComputerChoice();
@@ -73,7 +75,7 @@ function playGame(numOfRounds = 5) {
     updateScore(outcome, scores);
     declareRoundWinner(outcome, humanSelection, computerSelection);
 
-    if (scores.human === Math.ceil(numOfRounds / 2) || scores.computer === Math.ceil(numOfRounds / 2)) {
+    if (scores.human === earlyExitScore || scores.computer === earlyExitScore) {
       break;
     }
   }

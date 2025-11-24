@@ -1,4 +1,6 @@
 const choices = ['rock', 'paper', 'scissors'];
+let humanScore = 0;
+let computerScore = 0;
 
 const winCondition = {
   'rock': { 'rock': 0, 'paper': -1, 'scissors': 1 },
@@ -34,9 +36,6 @@ function playRound(humanChoice, computerChoice) {
   }
 
 function playGame(numOfRounds = 5) {
-  let humanScore = 0;
-  let computerScore = 0;
-
   for (let i = 0; i < numOfRounds; i++) {
     const humanSelection = getHumanChoice();
     const computerSelection = getComputerChoice();

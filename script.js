@@ -3,9 +3,9 @@ let humanScore = 0;
 let computerScore = 0;
 
 const winCondition = {
-  'rock': { 'rock': 0, 'paper': -1, 'scissors': 1 },
-  'paper': { 'rock': 1, 'paper': 0, 'scissors': -1 },
-  'scissors': { 'rock': -1, 'paper': 1, 'scissors': 0 },
+  'rock': 'scissors',
+  'paper': 'rock',
+  'scissors': 'paper',
 }
 
 function getComputerChoice() {
@@ -19,21 +19,20 @@ function getHumanChoice() {
 }
 
 function playRound(humanChoice, computerChoice) {
-    const outcome = winCondition[humanChoice][computerChoice];
-    if (outcome === 0) {
-      console.log('Tie!');
-      return;
-    }
-
-    // human won
-    if (outcome > 0) {
-      humanScore++;
-      console.log(`You won! ${humanChoice} beats ${computerChoice}`);
-    } else { // computer won
-      computerScore++;
-      console.log(`You lost! ${computerChoice} beats ${humanChoice}`);
-    }
+  if (humanChoice === computerChoice) {
+    console.log('Tie!');
+    return;
   }
+
+  // human won
+  if (winCondition[humanChoice] === computerChoice) {
+    humanScore++;
+    console.log(`You won! ${humanChoice} beats ${computerChoice}`);
+  } else { // computer won
+    computerScore++;
+    console.log(`You lost! ${computerChoice} beats ${humanChoice}`);
+  }
+}
 
 function playGame(numOfRounds = 5) {
   for (let i = 0; i < numOfRounds; i++) {

@@ -1,13 +1,18 @@
-const HUMAN_WIN = 1;
-const TIE = 0;
-const COMPUTER_WIN = -1;
+const OUTCOME = {
+  HUMAN_WIN: 1,
+  TIE: 0,
+  COMPUTER_WIN: -1,
+};
 
-const ROCK = 0;
-const PAPER = 1;
-const SCISSORS = 2;
+const MOVE = {
+  ROCK: 0,
+  PAPER: 1,
+  SCISSORS: 2,
+};
+
 
 const choices = ['rock', 'paper', 'scissors'];
-const winCondition = [SCISSORS, ROCK, PAPER];
+const winCondition = [MOVE.SCISSORS, MOVE.ROCK, MOVE.PAPER];
 
 
 function getComputerChoice() {
@@ -21,22 +26,22 @@ function getHumanChoice() {
 
 
 function updateScore(outcome, scores) {
-  if (outcome === HUMAN_WIN) {
+  if (outcome === OUTCOME.HUMAN_WIN) {
     scores.human++;
-  } else if (outcome === COMPUTER_WIN) {
+  } else if (outcome === OUTCOME.COMPUTER_WIN) {
     scores.computer++;
   }
 }
 
 function declareRoundWinner(outcome, humanChoice, computerChoice) {
   switch (outcome) {
-    case TIE:
+    case OUTCOME.TIE:
       console.log('Tie!');
       break;
-    case HUMAN_WIN:
+    case OUTCOME.HUMAN_WIN:
       console.log(`You won! ${choices[humanChoice]} beats ${choices[computerChoice]}`);
       break;
-    case COMPUTER_WIN:
+    case OUTCOME.COMPUTER_WIN:
       console.log(`You lost! ${choices[computerChoice]} beats ${choices[humanChoice]}`);
       break;
   }
@@ -44,14 +49,14 @@ function declareRoundWinner(outcome, humanChoice, computerChoice) {
 
 function playRound(humanChoice, computerChoice) {
   if (humanChoice === computerChoice) {
-    return TIE;
+    return OUTCOME.TIE;
   }
 
   // human won
   if (winCondition[humanChoice] === computerChoice) {
-    return HUMAN_WIN;
+    return OUTCOME.HUMAN_WIN;
   } else {
-    return COMPUTER_WIN;
+    return OUTCOME.COMPUTER_WIN;
   }
 }
 

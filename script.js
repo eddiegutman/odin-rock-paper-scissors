@@ -27,6 +27,14 @@ function playGame() {
     playRound(humanSelection, computerSelection);
   }
 
+  if (humanScore = computerScore) {
+    console.log('Tie!');
+  } else if (humanScore > computerScore) {
+    console.log('You won the game!');
+  } else {
+    console.log('You lost the game!');
+  }
+
   function playRound(humanChoice, computerChoice) {
     const resultNum = winCondition[humanChoice][computerChoice];
     if (resultNum === 0) {

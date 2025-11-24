@@ -59,14 +59,8 @@ function playRound(humanChoice, computerChoice) {
   declareRoundWinner(outcome, humanChoice, computerChoice);
 }
 
-function declareGameWinner() {
-  if (humanScore === computerScore) {
-    console.log('Tie!');
-  } else if (humanScore > computerScore) {
-    console.log('You won the game!');
-  } else {
-    console.log('You lost the game!');
-  }
+function declareGameWinner(humanScore, computerScore) {
+  console.log(`Final score - You: ${humanScore}, Computer: ${computerScore}`)
 }
 
 function playGame(numOfRounds = 5) {
@@ -75,7 +69,7 @@ function playGame(numOfRounds = 5) {
     const computerSelection = getComputerChoice();
     playRound(humanSelection, computerSelection);
   }
-  declareGameWinner();
+  declareGameWinner(humanScore, computerScore);
 }
 
 playGame();

@@ -56,7 +56,8 @@ function playRound(humanChoice, computerChoice) {
   }
 }
 
-function declareGameWinner({ human, computer }) {
+function declareGameWinner(scores) {
+  const { human, computer } = scores;
   console.log(`Final score - You: ${human}, Computer: ${computer}`)
 }
 

@@ -19,14 +19,14 @@ function getHumanChoice() {
 }
 
 function playRound(humanChoice, computerChoice) {
-    const resultNum = winCondition[humanChoice][computerChoice];
-    if (resultNum === 0) {
+    const outcome = winCondition[humanChoice][computerChoice];
+    if (outcome === 0) {
       console.log('Tie!');
       return;
     }
 
     // human won
-    if (resultNum > 0) {
+    if (outcome > 0) {
       humanScore++;
       console.log(`You won! ${humanChoice} beats ${computerChoice}`);
     } else { // computer won

@@ -1,6 +1,4 @@
 const choices = ['rock', 'paper', 'scissors'];
-let humanScore = 0;
-let computerScore = 0;
 
 const winCondition = {
   'rock': 'scissors',
@@ -18,24 +16,12 @@ function getHumanChoice() {
   return humanChoice?.toLowerCase();
 }
 
-function getRoundWinner(humanChoice, computerChoice) {
-  if (humanChoice === computerChoice) {
-    return 'tie';
-  }
 
-  // human won
-  if (winCondition[humanChoice] === computerChoice) {
-    return 'human';
-  } else {
-    return 'computer';
-  }
-}
-
-function updateScore(winner) {
+function updateScore(winner, scores) {
   if (winner === 'human') {
-    humanScore++;
+    scores.human++;
   } else if (winner === 'computer') {
-    computerScore++;
+    scores.computer++;
   }
 }
 
@@ -54,26 +40,40 @@ function declareRoundWinner(winner, humanChoice, computerChoice) {
 }
 
 function playRound(humanChoice, computerChoice) {
-  const outcome = getRoundWinner(humanChoice, computerChoice);
-  updateScore(outcome);
-  declareRoundWinner(outcome, humanChoice, computerChoice);
+  if (humanChoice === computerChoice) {
+    return 'tie';
+  }
+
+  // human won
+  if (winCondition[humanChoice] === computerChoice) {
+    return 'human';
+  } else {
+    return 'computer';
+  }
 }
 
-function declareGameWinner(humanScore, computerScore) {
-  console.log(`Final score - You: ${humanScore}, Computer: ${computerScore}`)
+function declareGameWinner({ human, computer }) {
+  console.log(`Final score - You: ${human}, Computer: ${computer}`)
 }
 
 function playGame(numOfRounds = 5) {
+  const scores = {
+    human: 0,
+    computer: 0,
+  }
+
   for (let i = 0; i < numOfRounds; i++) {
     const humanSelection = getHumanChoice();
     const computerSelection = getComputerChoice();
-    playRound(humanSelection, computerSelection);
+    const outcome = playRound(humanSelection, computerSelection);
+    updateScore(outcome, scores);
+    declareRoundWinner(outcome, humanSelection, computerSelection);
 
-    if (humanScore === 3 || computerScore === 3) {
+    if (scores.human === 3 || scores.computer === 3) {
       break;
     }
   }
-  declareGameWinner(humanScore, computerScore);
+  declareGameWinner(scores);
 }
 
 playGame();

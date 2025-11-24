@@ -1,9 +1,6 @@
 const choice = ['rock', 'paper', 'scissors'];
 const choicesCount = 3;
 
-let humanScore = 0;
-let computerScore = 0;
-
 const winCondition = {
   'rock': { 'rock': 0, 'paper': -1, 'scissors': 1 },
   'paper': { 'rock': 1, 'paper': 0, 'scissors': -1 },
@@ -20,24 +17,32 @@ function getHumanChoice() {
   return humanChoice?.toLowerCase();
 }
 
-function playRound(humanChoice, computerChoice) {
-  const resultNum = winCondition[humanChoice][computerChoice];
-  if (resultNum === 0) {
-    console.log('Tie!');
-    return;
+function playGame() {
+  let humanScore = 0;
+  let computerScore = 0;
+
+  for (let i = 0; i < 5; i++) {
+    const humanSelection = getHumanChoice();
+    const computerSelection = getComputerChoice();
+    playRound(humanSelection, computerSelection);
   }
 
-  // human won
-  if (resultNum > 0) {
-    humanScore++;
-    console.log(`You won! ${humanChoice} beats ${computerChoice}`);
-  } else { // computer won
-    computerScore++;
-    console.log(`You lost! ${computerChoice} beats ${humanChoice}`);
+  function playRound(humanChoice, computerChoice) {
+    const resultNum = winCondition[humanChoice][computerChoice];
+    if (resultNum === 0) {
+      console.log('Tie!');
+      return;
+    }
+
+    // human won
+    if (resultNum > 0) {
+      humanScore++;
+      console.log(`You won! ${humanChoice} beats ${computerChoice}`);
+    } else { // computer won
+      computerScore++;
+      console.log(`You lost! ${computerChoice} beats ${humanChoice}`);
+    }
   }
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection);
+playGame();

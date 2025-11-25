@@ -17,6 +17,13 @@ winCondition[MOVE.ROCK] = MOVE.SCISSORS;
 winCondition[MOVE.PAPER] = MOVE.ROCK;
 winCondition[MOVE.SCISSORS] = MOVE.PAPER;
 
+function beats(moveA, moveB) {
+  return winCondition[moveA] === moveB;
+}
+
+function moveToString(move) {
+  return choices[move];
+}
 
 function getComputerChoice() {
   return Math.floor(Math.random() * choices.length)
@@ -42,10 +49,10 @@ function declareRoundWinner(outcome, humanChoice, computerChoice) {
       console.log('Tie!');
       break;
     case OUTCOME.HUMAN_WIN:
-      console.log(`You won! ${choices[humanChoice]} beats ${choices[computerChoice]}`);
+      console.log(`You won! ${moveToString(humanChoice)} beats ${moveToString(computerChoice)}`);
       break;
     case OUTCOME.COMPUTER_WIN:
-      console.log(`You lost! ${choices[computerChoice]} beats ${choices[humanChoice]}`);
+      console.log(`You lost! ${moveToString(computerChoice)} beats ${moveToString(humanChoice)}`);
       break;
   }
 }
@@ -55,8 +62,7 @@ function playRound(humanChoice, computerChoice) {
     return OUTCOME.TIE;
   }
 
-  // human won
-  if (winCondition[humanChoice] === computerChoice) {
+  if (beats(humanChoice, computerChoice)) {
     return OUTCOME.HUMAN_WIN;
   } else {
     return OUTCOME.COMPUTER_WIN;
@@ -67,6 +73,11 @@ function declareGameWinner(scores) {
   const { human, computer } = scores;
   console.log(`Final score - You: ${human}, Computer: ${computer}`)
 }
+
+function hasWinner(scores, earlyExitScore) {
+  return scores.human === earlyExitScore || scores.computer === earlyExitScore;
+}
+
 
 function playGame(numOfRounds = 5) {
   const scores = {
@@ -83,7 +94,7 @@ function playGame(numOfRounds = 5) {
     updateScore(outcome, scores);
     declareRoundWinner(outcome, humanSelection, computerSelection);
 
-    if (scores.human === earlyExitScore || scores.computer === earlyExitScore) {
+    if (hasWinner(scores, earlyExitScore)) {
       break;
     }
   }

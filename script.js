@@ -43,17 +43,14 @@ function updateScore(outcome, scores) {
   }
 }
 
-function declareRoundWinner(outcome, humanChoice, computerChoice) {
+function formatRoundMessage(outcome, humanChoice, computerChoice) {
   switch (outcome) {
     case OUTCOME.TIE:
-      console.log('Tie!');
-      break;
+      return 'Tie!';
     case OUTCOME.HUMAN_WIN:
-      console.log(`You won! ${moveToString(humanChoice)} beats ${moveToString(computerChoice)}`);
-      break;
+      return `You won! ${moveToString(humanChoice)} beats ${moveToString(computerChoice)}`;
     case OUTCOME.COMPUTER_WIN:
-      console.log(`You lost! ${moveToString(computerChoice)} beats ${moveToString(humanChoice)}`);
-      break;
+      return `You lost! ${moveToString(computerChoice)} beats ${moveToString(humanChoice)}`;
   }
 }
 
@@ -91,7 +88,7 @@ function playGame(numOfRounds = 5) {
     const computerSelection = getComputerChoice();
     const outcome = playRound(humanSelection, computerSelection);
     updateScore(outcome, scores);
-    declareRoundWinner(outcome, humanSelection, computerSelection);
+    console.log(formatRoundMessage(outcome, humanSelection, computerSelection));
 
     if (hasWinner(scores, earlyExitScore)) {
       break;

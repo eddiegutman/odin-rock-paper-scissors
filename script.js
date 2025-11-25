@@ -54,6 +54,17 @@ function formatRoundMessage(outcome, humanChoice, computerChoice) {
   }
 }
 
+function colorRoundMessage(outcome) {
+  switch (outcome) {
+    case OUTCOME.TIE:
+      return '#2b38f5ff';
+    case OUTCOME.HUMAN_WIN:
+      return '#40c040ff';
+    case OUTCOME.COMPUTER_WIN:
+      return '#fd3939ff';
+  }
+}
+
 function playRound(humanChoice, computerChoice) {
   if (humanChoice === computerChoice) {
     return OUTCOME.TIE;
@@ -121,4 +132,5 @@ containerMoves?.addEventListener('click', (event) => {
 
   const result = document.querySelector('#result');
   result.textContent = formatRoundMessage(outcome, humanSelection, computerSelection);
+  result.style.color = colorRoundMessage(outcome);
 })

@@ -64,9 +64,8 @@ function playRound(humanChoice, computerChoice) {
 
   if (beats(humanChoice, computerChoice)) {
     return OUTCOME.HUMAN_WIN;
-  } else {
-    return OUTCOME.COMPUTER_WIN;
   }
+  return OUTCOME.COMPUTER_WIN;
 }
 
 function declareGameWinner(scores) {

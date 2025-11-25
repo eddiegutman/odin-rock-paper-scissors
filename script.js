@@ -97,4 +97,26 @@ function playGame(numOfRounds = 5) {
   declareGameWinner(scores);
 }
 
-playGame();
+//playGame();
+
+const containerMoves = document.querySelector('#container-moves');
+containerMoves?.addEventListener('click', (event) => {
+  let target = event.target;
+  let humanSelection;
+
+  switch (target.id) {
+    case 'move-rock':
+      humanSelection = MOVE.ROCK;
+      break;
+    case 'move-paper':
+      humanSelection = MOVE.PAPER;
+      break;
+    case 'move-scissors':
+      humanSelection = MOVE.SCISSORS;
+      break;
+  }
+
+  const computerSelection = getComputerChoice();
+  const outcome = playRound(humanSelection, computerSelection);
+  console.log(formatRoundMessage(outcome, humanSelection, computerSelection));
+})

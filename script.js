@@ -12,7 +12,10 @@ const MOVE = {
 
 
 const choices = ['rock', 'paper', 'scissors'];
-const winCondition = [MOVE.SCISSORS, MOVE.ROCK, MOVE.PAPER];
+const winCondition = [];
+winCondition[MOVE.ROCK] = MOVE.SCISSORS;
+winCondition[MOVE.PAPER] = MOVE.ROCK;
+winCondition[MOVE.SCISSORS] = MOVE.PAPER;
 
 
 function getComputerChoice() {

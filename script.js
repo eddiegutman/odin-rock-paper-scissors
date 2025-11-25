@@ -11,7 +11,7 @@ const MOVE = {
 };
 
 
-const choices = ['rock', 'paper', 'scissors'];
+const choices = ['Rock', 'Paper', 'Scissors'];
 const winCondition = [];
 winCondition[MOVE.ROCK] = MOVE.SCISSORS;
 winCondition[MOVE.PAPER] = MOVE.ROCK;
@@ -48,9 +48,9 @@ function formatRoundMessage(outcome, humanChoice, computerChoice) {
     case OUTCOME.TIE:
       return 'Tie!';
     case OUTCOME.HUMAN_WIN:
-      return `You won! ${moveToString(humanChoice)} beats ${moveToString(computerChoice)}`;
+      return `You won!\n ${moveToString(humanChoice)} beats ${moveToString(computerChoice)}`;
     case OUTCOME.COMPUTER_WIN:
-      return `You lost! ${moveToString(computerChoice)} beats ${moveToString(humanChoice)}`;
+      return `You lost!\n ${moveToString(computerChoice)} beats ${moveToString(humanChoice)}`;
   }
 }
 
@@ -118,5 +118,7 @@ containerMoves?.addEventListener('click', (event) => {
 
   const computerSelection = getComputerChoice();
   const outcome = playRound(humanSelection, computerSelection);
-  console.log(formatRoundMessage(outcome, humanSelection, computerSelection));
+
+  const result = document.querySelector('#result');
+  result.textContent = formatRoundMessage(outcome, humanSelection, computerSelection);
 })

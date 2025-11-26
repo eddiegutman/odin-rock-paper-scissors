@@ -10,6 +10,10 @@ const MOVE = {
   SCISSORS: 2,
 };
 
+const WINNING_SCORE = 5;
+const WIN_MESSAGE = 'You Win!';
+const LOSE_MESSAGE = 'You Lose!';
+
 const scores = {
   human: 0,
   computer: 0,
@@ -90,8 +94,8 @@ function declareGameWinner(scores) {
   console.log(`Final score - You: ${human}, Computer: ${computer}`)
 }
 
-function hasWinner(scores, earlyExitScore) {
-  return scores.human === earlyExitScore || scores.computer === earlyExitScore;
+function hasWinner() {
+  return scores.human === WINNING_SCORE || scores.computer === WINNING_SCORE;
 }
 
 
@@ -116,6 +120,28 @@ function playGame(numOfRounds = 5) {
   }
   declareGameWinner(scores);
 }
+
+function showModal(message) {
+  document.querySelector('#modal-message').textContent = message;
+  document.querySelector('#modal').classList.remove('hidden');
+}
+
+function hideModal() {
+  document.querySelector('#modal').classList.add('hidden');
+}
+
+function resetScore() {
+  scores.human = 0;
+  scores.computer = 0;
+  updateUIScore();
+}
+
+function restartGame() {
+  hideModal();
+  resetScore();
+}
+
+document.querySelector('#restart-game').addEventListener('click', restartGame);
 
 //playGame();
 
@@ -145,4 +171,12 @@ containerMoves?.addEventListener('click', (event) => {
 
   updateScore(outcome);
   updateUIScore();
+
+  if (hasWinner()) {
+    if (scores.human > scores.computer) {
+      showModal(WIN_MESSAGE);
+    } else {
+      showModal(LOSE_MESSAGE);
+    }
+  }
 })

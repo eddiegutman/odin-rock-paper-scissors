@@ -11,8 +11,8 @@ const MOVE = {
 };
 
 const WINNING_SCORE = 5;
-const WIN_MESSAGE = 'You Win!';
-const LOSE_MESSAGE = 'You Lose!';
+const WIN_MESSAGE = 'You won the game! 🎉';
+const LOSE_MESSAGE = 'You lost the game! 💀';
 
 const scores = {
   human: 0,
@@ -126,7 +126,14 @@ function restartGame() {
 
 document.querySelector('#restart-game').addEventListener('click', restartGame);
 
-//playGame();
+function launchConfetti() {
+  confetti({
+    particleCount: 150,
+    spread: 75,
+    origin: { y: 0.6 }
+  });
+}
+
 
 const containerMoves = document.querySelector('#container-moves');
 containerMoves?.addEventListener('click', (event) => {
@@ -155,6 +162,7 @@ containerMoves?.addEventListener('click', (event) => {
   if (hasWinner()) {
     if (scores.human > scores.computer) {
       showModal(WIN_MESSAGE);
+      launchConfetti();
     } else {
       showModal(LOSE_MESSAGE);
     }

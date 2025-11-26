@@ -98,29 +98,6 @@ function hasWinner() {
   return scores.human === WINNING_SCORE || scores.computer === WINNING_SCORE;
 }
 
-
-function playGame(numOfRounds = 5) {
-  const scores = {
-    human: 0,
-    computer: 0,
-  }
-
-  const earlyExitScore = Math.ceil(numOfRounds / 2);
-
-  for (let i = 0; i < numOfRounds; i++) {
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();
-    const outcome = playRound(humanSelection, computerSelection);
-    updateScore(outcome, scores);
-    console.log(formatRoundMessage(outcome, humanSelection, computerSelection));
-
-    if (hasWinner(scores, earlyExitScore)) {
-      break;
-    }
-  }
-  declareGameWinner(scores);
-}
-
 function showModal(message) {
   document.querySelector('#modal-message').textContent = message;
   document.querySelector('#modal').classList.remove('hidden');

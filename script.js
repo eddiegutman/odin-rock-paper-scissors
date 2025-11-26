@@ -10,6 +10,10 @@ const MOVE = {
   SCISSORS: 2,
 };
 
+const scores = {
+  human: 0,
+  computer: 0,
+}
 
 const choices = ['Rock', 'Paper', 'Scissors'];
 const winCondition = [];
@@ -35,12 +39,17 @@ function getHumanChoice() {
 }
 
 
-function updateScore(outcome, scores) {
+function updateScore(outcome) {
   if (outcome === OUTCOME.HUMAN_WIN) {
     scores.human++;
   } else if (outcome === OUTCOME.COMPUTER_WIN) {
     scores.computer++;
   }
+}
+
+function updateUIScore() {
+  document.querySelector('#score-human').textContent = scores.human;
+  document.querySelector('#score-computer').textContent = scores.computer;
 }
 
 function formatRoundMessage(outcome, humanChoice, computerChoice) {
@@ -133,4 +142,7 @@ containerMoves?.addEventListener('click', (event) => {
   const result = document.querySelector('#result');
   result.textContent = formatRoundMessage(outcome, humanSelection, computerSelection);
   result.style.color = colorRoundMessage(outcome);
+
+  updateScore(outcome);
+  updateUIScore();
 })

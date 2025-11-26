@@ -37,12 +37,6 @@ function getComputerChoice() {
   return Math.floor(Math.random() * choices.length)
 }
 
-function getHumanChoice() {
-  const humanChoice = prompt('Rock Paper or Scissors?')?.toLowerCase();
-  return choices.indexOf(humanChoice);
-}
-
-
 function updateScore(outcome) {
   if (outcome === OUTCOME.HUMAN_WIN) {
     scores.human++;

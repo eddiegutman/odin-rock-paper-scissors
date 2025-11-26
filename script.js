@@ -20,13 +20,14 @@ const scores = {
 }
 
 const choices = ['Rock', 'Paper', 'Scissors'];
-const winCondition = [];
-winCondition[MOVE.ROCK] = MOVE.SCISSORS;
-winCondition[MOVE.PAPER] = MOVE.ROCK;
-winCondition[MOVE.SCISSORS] = MOVE.PAPER;
+const WIN_CONDITION = {
+  [MOVE.ROCK]: MOVE.SCISSORS,
+  [MOVE.PAPER]: MOVE.ROCK,
+  [MOVE.SCISSORS]: MOVE.PAPER,
+};
 
 function beats(moveA, moveB) {
-  return winCondition[moveA] === moveB;
+  return WIN_CONDITION[moveA] === moveB;
 }
 
 function moveToString(move) {

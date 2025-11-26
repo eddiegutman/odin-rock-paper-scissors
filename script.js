@@ -78,6 +78,12 @@ function colorRoundMessage(outcome) {
   }
 }
 
+function showRoundResult(outcome, humanSelection, computerSelection) {
+  const result = document.querySelector('#result');
+  result.textContent = formatRoundMessage(outcome, humanSelection, computerSelection);
+  result.style.color = colorRoundMessage(outcome);
+}
+
 function playRound(humanChoice, computerChoice) {
   if (humanChoice === computerChoice) {
     return OUTCOME.TIE;
@@ -142,10 +148,7 @@ containerMoves?.addEventListener('click', (event) => {
   const computerSelection = getComputerChoice();
   const outcome = playRound(humanSelection, computerSelection);
 
-  const result = document.querySelector('#result');
-  result.textContent = formatRoundMessage(outcome, humanSelection, computerSelection);
-  result.style.color = colorRoundMessage(outcome);
-
+  showRoundResult(outcome, humanSelection, computerSelection);
   updateScore(outcome);
   updateUIScore();
 
